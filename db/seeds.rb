@@ -23,4 +23,16 @@ puts "Creating reviews..."
 # ********************************************************************
 # Create reviews Here
 
+Review.create(star_rating: 5, restaurant_id: shack.id, customer_id: baby_spice.id)
+Review.create(star_rating: 3, restaurant_id: bistro.id, customer_id: ginger_spice.id)
+Review.create(star_rating: 1, restaurant_id: palace.id, customer_id: palace.id)
+
+
 puts "Seeding done!"
+
+# t.integer "star_rating"
+# t.integer "restaurant_id"
+# t.integer "customer_id"
+
+# used the migrate file as a refrence to make the reviews 
+# 
