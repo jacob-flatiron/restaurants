@@ -27,5 +27,4 @@ ActiveRecord::Schema.define(version: 2022_05_05_172139) do
     t.integer "restaurant_id"
     t.integer "customer_id"
   end
-
 end

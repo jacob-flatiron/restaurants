@@ -2,27 +2,30 @@ class Customer < ActiveRecord::Base
     has_many :reviews
     has_many :restaurants, through: :reviews
 
-    # a Customer can give many reviews on one or many restaurants
-
-    def full_name
-        # fullname = "#{first_name} + #{last_name}"
-        Customer.select(:id, "CONCAT(first_name,' ',last_name) as name").find(1)
+    def full_name #TC
+        "#{first_name} #{last_name}"        
     end 
 
-    def favorite_restaurant
-        Customer.all.order('star_rating ASC').limit(1)
+    def favorite_restaurant #TC
+        reviews.order('star_rating DESC').first
+        end
+
+    def add_review(restaurant, star_rating) #TC
+        Review.create(restaurant_id: restaurant.id, star_rating: star_rating, customer_id: self.id)
     end
 
-    def add_review(restaurant, rating)
-        Customer.create(restaurant_id: restaurant.id, rating: rating, Customer_id: self.id)
-    end
-
+    
     def delete_reviews(restaurant)
-        Customer.reviews.destroy_all
+        restaurant.reviews.destroy_all
     end
-
 end
-
 # Customer#delete_reviews(restaurant)
 # takes a restaurant (an instance of the Restaurant class) and
 # removes all their reviews for this restaurant
+# you will have to delete rows from the reviews table to get this to work!
+
+#full_name # cut "the full_name = " and "+"  
+
+#favorite_restaurant # we are taking the "reviews" and ordingering them from high to low and "Customer" to "reviews"
+
+#add_review # changed customer from upper case "C" to lower case "c"
